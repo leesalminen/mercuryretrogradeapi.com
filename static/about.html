@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Mercury Retrograde API</title>
+</head>
+<body>
+	<h1>Mercury Retrograde API</h1>
+	<p>This API serves JSON over HTTPs. It allows you to determine whether Mercury is in retrograde for a given date.</p>
+
+	<h3>Why Should I Care?</h3>
+	<p>Mercury Retrograde can really suck. I experience communication breakdowns frequently when Mercury is in retrograde. Maybe you do too. Click <a href="http://www.astrologyzone.com/everything-you-need-to-know-about-mercury-retrograde/">here</a> to learn more about it.</p>
+
+	<h3>How Do I Use It?</h3>
+
+	<p><b>Basic Example</b></p>
+	<p>At the most basic level, you just need to make a GET request to the API. No auth, no body needed.</p>
+	<pre>
+		> curl https://mercuryretrogradeapi.com
+		{"is_retrograde":true}
+	</pre>
+
+	<p><b>Options</b></p>
+	<p>The only available option is a 'date' parameter in the GET request. It should contain a date in the YYYY-MM-DD format.</p>
+	<pre>
+		> curl https://mercuryretrogradeapi.com?date=2016-09-14
+		{"is_retrograde":true}
+
+		> curl https://mercuryretrogradeapi.com?date=2016-10-01
+		{"is_retrograde":false}
+	</pre>
+	
+	<p><b>JavaScript Example</b></p>
+	<p>This API is CORS enabled, meaning you can call it directly from a browser on any website.</p>
+	<pre>
+		fetch('https://mercuryretrogradeapi.com')
+		.then(res => res.json())
+		.then(data => data.is_retrograde)
+		.then(isRetrograde => {
+    			// the isRetrograde will be true/false
+    			alert(isRetrograde ? 'YES' : 'NO')
+		})
+	</pre>
+
+	<h3>What Does This Cost?</h3>
+	<p>It's free (really)! This API is used in production at <a target="_blank" href="https://www.gingrapp.com">Gingr</a>. Over the years this API has been used in smart homes, other astrology websites, and many other things. <a target="_blank" href="https://leesalminen.com">I</a> plan on hosting this API for many years to come, free of charge.</p>
+
+	<h3>How Reliable Is This API?</h3>
+	<p>This service has been online since 2015. In mid-2022, hosting was moved to <a target="_blank" href="https://fly.io">fly.io</a>. The API is now served over an anycast network in 5+ geographically distinct regions with automatic failover.</p>
+
+	<h3>I have a question.</h3>
+	<p>Email me <a href="mailto:mercuryretrogradeapi@leesalminen.com">here</a>.</p>
+
+</body>
+</html>

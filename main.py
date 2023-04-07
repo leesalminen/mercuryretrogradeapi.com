@@ -32,5 +32,9 @@ def mercury_retrograde():
     is_retrograde = is_mercury_retrograde(date)
     return jsonify({"is_retrograde": is_retrograde})
 
+@app.route('/about.html', methods=['GET'])
+def about():
+    return app.send_static_file('about.html')
+
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
