@@ -1,8 +1,10 @@
 from datetime import datetime, timedelta
 from flask import Flask, request, jsonify
+from flask_cors import CORS, cross_origin
 from skyfield.api import Topos, load
 
 app = Flask(__name__)
+CORS(app)
 
 def is_mercury_retrograde(date):
     ts = load.timescale()
@@ -22,6 +24,7 @@ def is_mercury_retrograde(date):
     return bool(ra_plus_1_day.hours < ra.hours)
 
 @app.route('/', methods=['GET'])
+@cross_origin()
 def mercury_retrograde():
     date_str = request.args.get('date', datetime.today().strftime('%Y-%m-%d'))
     try:
